@@ -1,0 +1,3 @@
+[submodule "FimClient"]
+	path = FimClient
+	url = git://github.com/Predica/FimClient.git
