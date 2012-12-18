@@ -1,0 +1,38 @@
+﻿<Window x:Class="Predica.FimExplorer.UI.WPF.Details.ObjectDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Predica.FimExplorer.UI.WPF.Details" 
+        Title="{Binding ResourceForWindowTitle}" Height="353" Width="632">
+    <Window.Resources>
+        <ResourceDictionary>
+            <local:DetailsValueCellTemplateSelector x:Key="valueCellTemplateSelector"></local:DetailsValueCellTemplateSelector>
+            <DataTemplate x:Key="normalCell">
+                <TextBlock Text="{Binding Value}"></TextBlock>
+            </DataTemplate>
+            <DataTemplate x:Key="referenceCell">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock><Hyperlink Click="Hyperlink_Click">
+                        <TextBlock Text="{Binding Value}"></TextBlock>
+                    </Hyperlink></TextBlock>
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+        <DataGrid 
+            ItemsSource="{Binding Attributes}"
+            SelectionUnit="Cell"
+            AutoGenerateColumns="False"
+        >
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Name"
+                    Binding="{Binding AttributeName}" 
+                />
+                <DataGridTemplateColumn
+                    Header="Value"
+                    CellTemplateSelector="{StaticResource valueCellTemplateSelector}" 
+                    CopyingCellClipboardContent="ValueColumn_CopyingCellClipboardContent"
+                />
+            </DataGrid.Columns>
+        </DataGrid>
+</Window>
